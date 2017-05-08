@@ -10,15 +10,15 @@ definitions = {
     'Output': 'output.csv'
 }
 
-def TimedSortFunction(funcname, *args):
+def TimedSortFunction(params):
     startTime = time.time()
-    func = ChooseAlgorithm(funcname)
-    arr = func(*args)
+    func = ChooseAlgorithm(params[0])
+    arr = func(params[1])
+    elapsedTime = time.time() - startTime
 
     np.savetxt(definitions['Output'], arr, fmt='%d', delimiter=',')
     print(hashlib.sha512(', '.join([str(x) for x in arr]).encode('utf-8')).hexdigest())
 
-    elapsedTime = time.time() - startTime
     print('function [{}] finished in {} ms'.format(
         func.__name__, int(elapsedTime * 1000)))
 
@@ -32,8 +32,8 @@ def NewArrayToCSV(size, isUnique = True):
     print('Array Size ::', len(arr))
     np.savetxt(definitions['CSVFileName'], arr, fmt='%d', delimiter=',')
 
-def CSVToArray():
-    return list(np.genfromtxt(definitions['CSVFileName'], delimiter=',', dtype=None))
+def CSVToArray(path):
+    return list(np.genfromtxt(path, delimiter=',', dtype=None))
 
 def ChooseAlgorithm(func):
     return {
@@ -62,5 +62,9 @@ def InitialSetup():
     if not definitions['Output'].endswith('.csv'):
         definitions['Output'] = definitions['Output'] + '.csv'
 
-    NewArrayToCSV(int(arrSize))
-    return chosenAlgorithm
+    arr = []
+    if(arrSize is not 0):
+        NewArrayToCSV(int(arrSize))
+    arr = CSVToArray(definitions['CSVFileName'])
+
+    return chosenAlgorithm, arr
