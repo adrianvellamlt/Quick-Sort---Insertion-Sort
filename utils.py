@@ -68,15 +68,13 @@ def InitialSetup():
         definitions['CSVFileName'] = definitions['CSVFileName'] + '.csv'
     if not definitions['Output'].endswith('.csv'):
         definitions['Output'] = definitions['Output'] + '.csv'
-    definitions['CSVFileName'] = os.path.abspath(os.path.dirname(sys.argv[0])) + '/' + definitions['CSVFileName']
-    definitions['Output'] = os.path.abspath(os.path.dirname(sys.argv[0])) + '/' + definitions['Output']
+    definitions['Output'] = os.path.abspath(os.path.dirname(sys.argv[0])) + '\\' + definitions['Output']
 
-    arr = []
-    if(arrSize is not 0):
-        NewArrayToCSV(int(arrSize),True if isUnique is '1' else False, shuffle)
-    arr = CSVToArray(definitions['CSVFileName'])
+    if (arrSize is not '0'):
+        definitions['CSVFileName'] = os.path.abspath(os.path.dirname(sys.argv[0])) + '\\' + definitions['CSVFileName']
+        NewArrayToCSV(int(arrSize), True if isUnique is '1' else False, shuffle)
 
-    return chosenAlgorithm, arr
+    return chosenAlgorithm, CSVToArray(definitions['CSVFileName'])
 
 def SlightlyShuffle(arr):
     for i in range(len(arr)//15):
