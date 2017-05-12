@@ -18,6 +18,7 @@ This project generates a csv file with a given amount of random numbers. This cs
 
 Rework of quicksort algorithms. Quicksort algorithms are now implemented through [trampolining](https://en.wikipedia.org/wiki/Trampoline_(computing)). This means that the sorting algorithms can now support larger arrays without raising a stack overflow error (due to deep recursion). Tested for up to arrays of 312500 numbers.
 ![alt text](http://image.prntscr.com/image/b4ebd11f22334e3193cdbbd0041a80f3.png "Log Log Graphs")
+
 ---
 #### v1.0
 
