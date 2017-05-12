@@ -1,5 +1,4 @@
 class InsertionSort(object):
-
     def Insert(self, x, arr):
         if not arr: return [x]
         elif x <= arr[0]: return [x] + arr
